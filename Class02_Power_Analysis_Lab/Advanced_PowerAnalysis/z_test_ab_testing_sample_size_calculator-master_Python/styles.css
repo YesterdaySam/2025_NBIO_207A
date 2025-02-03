@@ -1,0 +1,27 @@
+# this needs to be put under "usr/local/lib/python3.5/dist-packages/dash_core_components/"
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: grey;
+    color: #fff;
+    text-align: left;
+    border-radius: 10px;
+    padding: 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    
+}
