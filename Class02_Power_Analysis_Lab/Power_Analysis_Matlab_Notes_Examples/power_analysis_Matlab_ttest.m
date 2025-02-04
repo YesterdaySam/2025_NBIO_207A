@@ -26,6 +26,8 @@ ylabel('Power')
 
 
 
+
+
 %clc;
 alpha = 0.05;
 power = zeros(1,100);
