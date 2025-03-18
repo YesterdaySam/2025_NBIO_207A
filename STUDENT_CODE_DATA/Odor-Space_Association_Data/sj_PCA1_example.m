@@ -157,9 +157,9 @@ plot3(meanright(:,1),meanright(:,2),meanright(:,3),'bx-', 'LineWidth',4);
 
 
 % 2d plot
-figure(100); hold on;
-plot(meanleft(:,1),meanleft(:,2),'ro-', 'LineWidth',4);
-plot(meanright(:,1),meanright(:,2),'bx-', 'LineWidth',4);
+% figure(100); hold on;
+% plot(meanleft(:,1),meanleft(:,2),'ro-', 'LineWidth',4);
+% plot(meanright(:,1),meanright(:,2),'bx-', 'LineWidth',4);
 
 
 %% 
