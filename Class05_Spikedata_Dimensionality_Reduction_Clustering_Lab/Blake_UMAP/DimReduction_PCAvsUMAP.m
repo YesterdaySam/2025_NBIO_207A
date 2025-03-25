@@ -2,10 +2,10 @@
 clear
 set(0, 'DefaultTextInterpreter', 'none'); % for figures
 
-load("F:\PostDoc_JadhavLab\Teaching\NBIO_207A\codeTestBed\TH605_train_Day11.mat")
-%load("F:\PostDoc_JadhavLab\Teaching\NBIO_207A\codeTestBed\TH605_test_Day1.mat")
+load("D:\PostDoc_JadhavLab\Teaching\NBIO_207A\2025_Spring\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_train_Day11.mat")
+%load("D:\PostDoc_JadhavLab\Teaching\NBIO_207A\2025_Spring\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_test_Day1.mat")
 
-%load("F:\PostDoc_JadhavLab\Teaching\NBIO_207A\codeTestBed\TH405_train_Day34.mat")
+%load("D:\PostDoc_JadhavLab\Teaching\NBIO_207A\2025_Spring\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH405_train_Day34.mat")
 
 %% Data explainer
 
@@ -63,6 +63,15 @@ legend(h, 'A','B','C','D','E');
 set(gca,'fontsize',18)
 
 title({'PCA PFC 1st 2nd',currID})
+
+%% PCA side quest - Coefficents / loadings
+% coeff will be N neurons by N PCs where each col is a PC from 1:N
+% this can tell you the coefficient for each neuron in each PC
+% you could use these values to go back to your neurons to group/cluster
+% them
+
+figure
+scatter(coeff(:,1),coeff(:,2),'filled','k')
 
 %% UMAP
 % Open run_umap for details
