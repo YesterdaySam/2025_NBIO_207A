@@ -1,5 +1,6 @@
 
 %%
+load('Example3_spikedata_pca_problem.mat')
 
 % PCA on Firing rate 
 % ----------------
@@ -11,6 +12,8 @@ LRcombined = [leftfr; rightfr];
 
 leftidx = 1:size(leftfr,1);
 rightidx = size(leftfr,1)+1:size(LRcombined,1);
+nLeft = length(leftidx);
+nRight = length(rightidx);
 
 [COEFF, SCORES, LATENT, TSQUARED, EXPLAINED, MU] = pca(LRcombined);
 SCORE = SCORES;
@@ -122,11 +125,22 @@ axis([0 13.5 0 100]);
 
 
 %% 
+% Reset original indices 
+leftidx = 1:size(leftfr,1);
+rightidx = size(leftfr,1)+1:size(LRcombined,1);
 
+% Shuffle trial indices to create shuffle
+shufInds = randperm(length([leftidx, rightidx]));
+
+leftShuf = shufInds(1:length(leftidx));
+rightShuf = shufInds(length(leftfr)+1:length([leftidx, rightidx]));
+
+%%
 
 % GET average PCA trajectory for left and right trials, and also per trials 
 
 meanleft=[]; meanright=[];
+shufall = [];
 lefttrials_pc = zeros(Nlefttr,Nbins,3); righttrials_pc =zeros(Nrighttr,Nbins,3);
 for i = 1:Nbins
     
@@ -136,8 +150,12 @@ for i = 1:Nbins
     currright_scores = curr_scores(rightidx,:);
     meanleft(i,:) = nanmean(currleft_scores,1);   % For current timebin, save mean of 1st 3 PCs
     meanright(i,:) = nanmean(currright_scores,1); 
-    errleft(i,:) = nansem(currleft_scores,1);     % For current timebin, save sem of 1st 3 PCs
-    errright(i,:) = nansem(currright_scores,1);
+    errleft(i,:) = nanstd(currleft_scores,1)/sqrt(nLeft);     % For current timebin, save sem of 1st 3 PCs
+    errright(i,:) = nanstd(currright_scores,1)/sqrt(nRight);
+    
+    currshufall_scores = curr_scores([leftShuf, rightShuf],:);
+    shufall(i,:) = nanmean(currshufall_scores,1);
+    errshuf(i,:) = nanstd(currshufall_scores,1)/sqrt(nLeft+nRight);
     
     % Gather to plot trial-by-trial
     lefttrials_pc(:,i,:)= currleft_scores;
@@ -149,17 +167,17 @@ end
 
 
 
-% 3d plot
-figure(99); hold on;
-plot3(meanleft(:,1),meanleft(:,2),meanleft(:,3),'ro-', 'LineWidth',4);
-plot3(meanright(:,1),meanright(:,2),meanright(:,3),'bx-', 'LineWidth',4);
-
-
-
-% 2d plot
-figure(100); hold on;
-plot(meanleft(:,1),meanleft(:,2),'ro-', 'LineWidth',4);
-plot(meanright(:,1),meanright(:,2),'bx-', 'LineWidth',4);
+% % 3d plot
+% figure(99); hold on;
+% plot3(meanleft(:,1),meanleft(:,2),meanleft(:,3),'ro-', 'LineWidth',4);
+% plot3(meanright(:,1),meanright(:,2),meanright(:,3),'bx-', 'LineWidth',4);
+% 
+% 
+% 
+% % 2d plot
+% figure(100); hold on;
+% plot(meanleft(:,1),meanleft(:,2),'ro-', 'LineWidth',4);
+% plot(meanright(:,1),meanright(:,2),'bx-', 'LineWidth',4);
 
 
 %% 
@@ -184,6 +202,10 @@ plot(timeaxis,meanright(:,PCnum),'bx-', 'LineWidth',4);
 plot(timeaxis,meanright(:,PCnum)+errright(:,PCnum),'b--', 'LineWidth',2);
 plot(timeaxis,meanright(:,PCnum)-errright(:,PCnum),'b--', 'LineWidth',2);
 
+plot(timeaxis,shufall(:,PCnum),'kx-', 'LineWidth',4);
+plot(timeaxis,shufall(:,PCnum)+errshuf(:,PCnum),'k--', 'LineWidth',2);
+plot(timeaxis,shufall(:,PCnum)-errshuf(:,PCnum),'k--', 'LineWidth',2);
 
-keyboard;
+
+% keyboard;
 
