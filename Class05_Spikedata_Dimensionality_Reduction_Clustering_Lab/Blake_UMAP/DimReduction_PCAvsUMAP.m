@@ -2,10 +2,10 @@
 clear
 set(0, 'DefaultTextInterpreter', 'none'); % for figures
 
-load("D:\PostDoc_JadhavLab\Teaching\NBIO_207A\2025_Spring\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_train_Day11.mat")
-%load("D:\PostDoc_JadhavLab\Teaching\NBIO_207A\2025_Spring\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_test_Day1.mat")
+load("C:\Users\blake\OneDrive\Documents\teaching\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_train_Day11.mat")
+%load("C:\Users\blake\OneDrive\Documents\teaching\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_test_Day1.mat")
 
-%load("D:\PostDoc_JadhavLab\Teaching\NBIO_207A\2025_Spring\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH405_train_Day34.mat")
+%load("C:\Users\blake\OneDrive\Documents\teaching\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH405_train_Day34.mat")
 
 %% Data explainer
 
@@ -72,6 +72,10 @@ title({'PCA PFC 1st 2nd',currID})
 
 figure
 scatter(coeff(:,1),coeff(:,2),'filled','k')
+
+Z = linkage(coeff(:,1:3));
+figure
+dendrogram(Z)
 
 %% UMAP
 % Open run_umap for details
