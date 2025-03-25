@@ -1,8 +1,8 @@
 function [leftfr,rightfr, lefttrials, righttrials, cellinds, np_left, np_right,np_all] = sj_columnVectors_day_npCells(animal, animno, day, region, win, binsize)
 
 %[topDir,~] = cs_setPaths();
-topDir = '/Users/Shantanu/data25/OLF_CS/Data/';
-figdir = '/Users/Shantanu/data25/OLF_CS/Data/sj_Figures';
+topDir = '/Users/shantanu/Dropbox/Mac (2)/Documents/GitHub/2025_NBIO_207A/STUDENT_CODE_DATA/Odor-Space_Association_Data/';
+figdir = '/Users/shantanu/Dropbox/Mac (2)/Documents/GitHub/2025_NBIO_207A/STUDENT_CODE_DATA/Odor-Space_Association_Data/figdir';
 
 winstr = [num2str(-win(1)*1000),'-',num2str(win(2)*1000),'ms'];
 winsize = win(1)+win(2);
