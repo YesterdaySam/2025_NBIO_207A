@@ -2,7 +2,7 @@
 clear
 set(0, 'DefaultTextInterpreter', 'none'); % for figures
 
-load("C:\Users\blake\OneDrive\Documents\teaching\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_train_Day11.mat")
+load("F:\Research\Code\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_train_Day11.mat")
 %load("C:\Users\blake\OneDrive\Documents\teaching\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH605_test_Day1.mat")
 
 %load("C:\Users\blake\OneDrive\Documents\teaching\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab\Blake_UMAP\TH405_train_Day34.mat")
@@ -19,7 +19,7 @@ load("C:\Users\blake\OneDrive\Documents\teaching\2025_NBIO_207A\Class05_Spikedat
 
 %% PCA - PFC
 
-skipHome_offset_PFC = 0; % 13 bin offset for choice trials to not plot home, 0 for whole trajectory
+skipHome_offset_PFC = 13; % 13 bin offset for choice trials to not plot home, 0 for whole trajectory
 
 [coeff,score_PFC,latent,tsquared,explained,mu] = pca(currUnits_PFC,'centered',false); % data is already centered
 
@@ -89,7 +89,8 @@ UMAP_dims = 2;  % Graphs created for 2 or 3.
 % low neighbors, more local. high, more global
 UMAP_neighbor = 30; % Blake: 30  Wenbo: 50  Gardner et al. 2022: 5  UMAP default: 15
 
-% min_dist: Controls how tightly UMAP is allowed to pack points.
+% min_dist: Controls how tightly UMAP is allowed to pack points. Smaller =
+% tighter; larger value = looser
 UMAP_minDist = 0.6; % Blake: 0.6  Wenbo: 0.6  Gardner et al. 2022: 0.05  UMAP default: 0.3
 
 % metric: controls how distance is computed in the ambient space
@@ -348,6 +349,14 @@ title({'PCA HPC 1st 2nd',currID})
 
 plot_UMAP(reduction_HPC,full_numBins,trial_IDs,skipHome_offset_HPC,cmap_firstSecond_train,markers)
 title({'UMAP HPC 1st 2nd',currID})
+
+%% Plot PCA - HPC - Old Matlab
+figure
+scatter(coeff(:,1),coeff(:,2),'filled','k')
+
+Z = linkage(coeff(:,1:3));
+figure
+dendrogram(Z)
 
 
 %%
