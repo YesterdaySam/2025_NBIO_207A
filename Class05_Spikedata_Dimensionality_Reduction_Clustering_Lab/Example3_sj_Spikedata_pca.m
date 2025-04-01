@@ -3,13 +3,14 @@
 load Example3_spikedata_pca_problem
 
 %%
+load('Example3_spikedata_pca_problem.mat')
 
 % PCA on Firing rate 
 % ----------------
 LRcombined = [leftfr; rightfr];
-[dim, num_data] = size(LRcombined);  
+[ntrialstot, ncells] = size(LRcombined);  
 % dim/trials/obs/datapoints = Ntrials (left+right)
-% num_data = number of neurons
+% ncells = number of neurons
 % LRcombined or X is a Ntrials x Nneurons matrix
 
 leftidx = 1:size(leftfr,1);
@@ -61,8 +62,12 @@ axis([0 3.5 0 100]);
 
 win = [200 800]; %-200ms to 800ms
 leftvector=[]; rightvector=[]; %For each timebin, save Ntrial X Nnenuron firing matrix
+<<<<<<< Updated upstream
 
 binsize=100;
+=======
+binsize = 100;
+>>>>>>> Stashed changes
 Nneu = size(lefttrials,1); 
 Nlefttr = length(leftidx);
 Nrighttr = length(rightidx);
@@ -135,8 +140,8 @@ for i = 1:Nbins
     currright_scores = curr_scores(rightidx,:);
     meanleft(i,:) = nanmean(currleft_scores,1);   % For current timebin, save mean of 1st 3 PCs
     meanright(i,:) = nanmean(currright_scores,1); 
-    errleft(i,:) = nansem(currleft_scores,1);     % For current timebin, save sem of 1st 3 PCs
-    errright(i,:) = nansem(currright_scores,1);
+    errleft(i,:) = nanstd(currleft_scores,1)./size(currleft_scores,1);     % For current timebin, save sem of 1st 3 PCs
+    errright(i,:) = nanstd(currright_scores,1)./size(currleft_scores,1);
     
     % Gather to plot trial-by-trial
     lefttrials_pc(:,i,:)= currleft_scores;

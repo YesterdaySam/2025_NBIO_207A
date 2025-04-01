@@ -84,6 +84,13 @@ rate = A0*ones(Nt,1)*W0 + Input1*W1 + Input2*W2 + noise*randn(size(rate));
 % this correctly as rate stores the neurons as rows.
 [COEFF, SCORE, LATENT, TSQUARED, EXPLAINED, MU] = pca(rate);
 
+%% 
+mdl = fitlm(t,mean(rate'));
+yhat = mdl.predict(t);
+resid = rate - yhat;
+
+[COEFF, SCORE, LATENT, TSQUARED, EXPLAINED, MU] = pca(resid);
+
 %% In this example the principal components are related to the weight matrices.
 % Note that the sign (whether positively or negatively correlated) can not
 % be determined from the principal component vectors in COEFF which could as

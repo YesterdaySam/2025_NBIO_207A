@@ -1,51 +1,68 @@
 %function [p] = gaussian(x, mu, sigma)
 %p = 1 / (sigma * sqrt(2*pi)) * exp(-1/2 * ((x - mu)/sigma).^2);
 
+% 1) Show expected value and variance of binomial
+drawn = 1000;
+draws = zeros(drawn,1);
+drawp = 0.7;
+for i = 1:drawn
+    if rand(1) <= drawp
+        draws(i) = 1;
+    else
+        draws(i) = 0;
+    end
+end
 
+disp(['Sum of draws at p = ' num2str(drawp) ' is ' num2str(sum(draws)) ' compared to E[x] = n*p = ' num2str(drawn*drawp)])
+disp(['Var([X] = n*p(1-p) = ' num2str(drawp*drawn*(1-drawp))])
+
+%%
 % 2) Gaussian distributions 
 % ----------------------------
 x = -6:.0012:6;
 f = gaussian(x, 0, 1);
-figure(100); hold on; plot(f);
+figure(100); hold on; plot(x,f);
 %a. >1 stdev from mean
 a = find((x > 1) | (x < -1));
 p = sum(f(a))/sum(f)
-0.3172
+%0.3172
 %b. >2 stdev from mean
 a = find((x > 2) | (x < -2));
 p = sum(f(a))/sum(f)
-0.0455
+%0.0455
 %c. >3 stdev from mean
 a = find((x > 3) | (x < -3));
 p = sum(f(a))/sum(f)
-0.0027
+%0.0027
 
 
-
+%%
 % 3) Gaussian CDF
 %-------------
 c = cumsum(f) ./ sum(f);
-figure(100); hold on; plot(c, 'g');
+figure; hold on; plot(c, 'g');
 s = [];
-r = rand(1000,1);
-for i = 1:1000
+
+drawn = 1000;
+
+r = rand(drawn,1);
+for i = 1:drawn
     xr(i) = x(min(find(c > r(i))));
 end
 %a > 1 stdev from mean
 length(find((xr < -1) | (xr > 1))) / 1000
-0.3070
+% 0.3070
 %b. > 2 stdev from mean
 length(find((xr < -2) | (xr > 2))) / 1000
-0.049
+% 0.049
 %c. > 3 stdev from mean
 length(find((xr < -3) | (xr > 3))) / 1000
-0.0040
+% 0.0040
 
 
 
 
-
-
+%%
 % 4) Distance between gaussian and binomial
 % -------------------------------------------
 pvals = 0.05:0.05:.5;
@@ -76,8 +93,7 @@ ylabel('Distance');
 
 
 
-
-
+%%
 % 5) Draws from distribution
 % --------------------
 %distribution
@@ -133,3 +149,8 @@ subplot(1,2,2)
 plot(sten1c, c)
 xlabel('Standard Error');
 ylabel('Probability');
+
+%% 
+function [tmpout] = gaussian(xcoords, mux, stdx)
+tmpout = normpdf(xcoords,mux,stdx);
+end

@@ -4,17 +4,9 @@
 % Left trials: 49, Right trials, 46
 % 26 neurons, Firing rate in 30 time bins [-450:50:1000] ms.
 % 0 ms is time of cue
-cd('F:\Research\Code\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_Clustering_Lab')
-
+cd(
 bins = [-450:50:1000];
-<<<<<<< Updated upstream
-load ("Example5_olfact_FRdata.mat");
-leftTrials_ori = leftTrials;
-rightTrials = rightTrials;
-%load('cs_FRdata.mat')
-=======
 load('Example5_olfact_FRdata.mat')
->>>>>>> Stashed changes
 leftTrials = cellfun(@(x) x(:), leftTrials,'UniformOutput',false);
 rightTrials = cellfun(@(x) x(:), rightTrials,'UniformOutput',false);
 L = cat(2,leftTrials{:})';
