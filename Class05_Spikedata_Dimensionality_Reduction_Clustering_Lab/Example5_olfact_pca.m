@@ -8,10 +8,14 @@ cd('F:\Research\Code\2025_NBIO_207A\Class05_Spikedata_Dimensionality_Reduction_C
 
 bins = [-450:50:1000];
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 load ("Example5_olfact_FRdata.mat");
 leftTrials_ori = leftTrials;
 rightTrials = rightTrials;
 %load('cs_FRdata.mat')
+=======
+load('Example5_olfact_FRdata.mat')
+>>>>>>> Stashed changes
 =======
 load('Example5_olfact_FRdata.mat')
 >>>>>>> Stashed changes

@@ -63,8 +63,12 @@ axis([0 3.5 0 100]);
 win = [200 800]; %-200ms to 800ms
 leftvector=[]; rightvector=[]; %For each timebin, save Ntrial X Nnenuron firing matrix
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 binsize=100;
+=======
+binsize = 100;
+>>>>>>> Stashed changes
 =======
 binsize = 100;
 >>>>>>> Stashed changes
