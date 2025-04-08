@@ -3,6 +3,7 @@ clear all;
 %close all;
 %%
 %-----------load the data----------%
+cd('F:\Research\Code\2025_NBIO_207A\Lab_SpikeTrains_PoissonProcesses\SpikeTrains_Example_Hippocampal_Data')
 load('Spiketrains_running.mat')
 load('Spiketrains_SWRs.mat')
 %%
